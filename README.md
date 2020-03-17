@@ -1,1 +1,1 @@
-# Cat-vs-Dog-Image-Classifier-Differnet-Models-with-Pytroch
+# Cat-vs-Dogs-Different-Model-Approaches-With-PyTroch
