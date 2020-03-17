@@ -20,3 +20,4 @@ learning_rate = 0.001
 encoder = {"cat": 0, "dog": 1}
 train_data = 'TrainData.npy'
 test_data = 'TestData.npy'
+current_dir = "E:\My Projects\Cat-vs-Dog-Image-Classifier-Differnet-Models-with-Pytroch\Data"

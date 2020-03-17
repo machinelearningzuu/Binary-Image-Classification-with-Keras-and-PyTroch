@@ -26,13 +26,6 @@ class CatVsDogsClassifier(object):
         self.device = torch.device('cuda:0') if is_model_heavy and torch.cuda.is_available() else torch.device('cpu')
         print("Running on {}".format(self.device))
 
-        self.train_transforms = transforms.Compose([transforms.RandomRotation(30),
-                                               transforms.RandomHorizontalFlip(),
-                                               transforms.ToTensor()
-                                              ])
-
-        self.test_transforms = transforms.Compose([transforms.ToTensor()])
-
     def Classifier(self):
         self.model = nn.Sequential(
                     nn.Linear(input_size, dense1),

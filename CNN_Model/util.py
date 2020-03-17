@@ -17,7 +17,6 @@ from variables import*
 def get_data():
     if not os.path.exists(train_data) or not os.path.exists(test_data):
         print("Data preprocessing and Saving !!!")
-        current_dir = os.getcwd()
 
         cat_dir = os.path.join(current_dir, cat_folder)
         dog_dir = os.path.join(current_dir, dog_folder)

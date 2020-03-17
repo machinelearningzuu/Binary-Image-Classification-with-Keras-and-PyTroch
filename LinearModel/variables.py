@@ -16,3 +16,4 @@ keep_prob = 0.3
 learning_rate = 0.0001
 num_epochs = 10
 verbose = 100
+current_dir = "E:\My Projects\Cat-vs-Dog-Image-Classifier-Differnet-Models-with-Pytroch\Data"
