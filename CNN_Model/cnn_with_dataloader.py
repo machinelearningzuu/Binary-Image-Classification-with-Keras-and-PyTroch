@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from time import time
 from variables import*
-from util import get_data
+from dataloader import load_data
 
 class CatVsDogsCNN(nn.Module):
     def __init__(self):
@@ -57,17 +57,10 @@ class CatVsDogsCNN(nn.Module):
 class Model(object):
     def __init__(self, device, model):
 
-        TrainData, TestData = get_data()
-        Xtrain = [x for x, y in TrainData]
-        Ytrain = [y for x, y in TrainData]
-        Xtest = [x for x, y in TestData]
-        Ytest = [y for x, y in TestData]
+        train_loader, test_loader = load_data()
 
-        train_dataset = TensorDataset(torch.FloatTensor(Xtrain), torch.tensor(Ytrain, dtype=torch.float64))
-        test_dataset = TensorDataset(torch.FloatTensor(Xtest), torch.tensor(Ytest, dtype=torch.float64))
-
-        self.train_loader = DataLoader(train_dataset, shuffle=True, batch_size=batch_size)
-        self.test_loader = DataLoader(test_dataset, shuffle=True, batch_size=batch_size)
+        self.train_loader = train_loader
+        self.test_loader = test_loader
         self.model = model
         self.device = device
 
@@ -105,7 +98,6 @@ class Model(object):
         plt.show()
 
     def prediction(self):
-        temp = []
         with torch.no_grad():
             n_correct = 0
             for batch in self.test_loader:
@@ -113,14 +105,9 @@ class Model(object):
                 images, labels = images.to(self.device).unsqueeze(dim=1), labels.to(self.device).float()
                 preds = self.model(images)
                 n_correct += preds.argmax(dim=1).eq(labels).sum().item()
-                temp.append(preds.to('cpu'))
-                del preds
-                torch.cuda.empty_cache()
         print("Val_accuracy: {}".format(n_correct / len(self.test_loader) /batch_size))
 
-
 if __name__ == "__main__":
-    torch.cuda.empty_cache()
     torch.set_grad_enabled(True)
 
     is_model_heavy = True

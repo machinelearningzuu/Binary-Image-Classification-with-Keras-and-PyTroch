@@ -56,7 +56,7 @@ def read_image(cat_image_paths,dog_image_paths,cat=True):
     for path in cat_image_paths:
         try:
             img=cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-            img=cv2.resize(img, (image_crop,image_crop))
+            img=cv2.resize(img, (crop,crop))
             img = img / 255.0
             data.append([np.array(img),encoder[anim]])
         except Exception as e:
